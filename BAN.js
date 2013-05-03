@@ -1,6 +1,5 @@
 ﻿
 var useChannel = "";	//使うチャンネル
-var userinfo = "";
 
 
 function event::onChannelText(prefix, channel, text) {
@@ -19,8 +18,11 @@ function BAN(prefix, channel, text) {
 	
 	prefix.address.match(/^(.*)$/i);
 	var userinfo = RegExp.$1;
-	userinfo = "+b *!*@" + userinfo;
 	log(userinfo);
+	var usernick = prefix.nick;
+	userinfo = "+b *!*@" + userinfo;
+	mode(channel, userinfo);
+	userinfo = "+k " + usernick;
 	mode(channel, userinfo);
 	return;
 }
